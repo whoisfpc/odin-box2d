@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 package box2d
 
+import "base:intrinsics"
 foreign import lib "lib/box2d.lib"
 _ :: lib
 
