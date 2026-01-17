@@ -430,14 +430,14 @@ foreign lib {
 
 	/// Get the shape ids for all shapes on this body, up to the provided capacity.
 	/// @returns the number of shape ids stored in the user array
-	Body_GetShapes :: proc(bodyId: BodyId, shapeArray: ^ShapeId, capacity: i32) -> i32 ---
+	Body_GetShapes :: proc(bodyId: BodyId, shapeArray: [^]ShapeId, capacity: i32) -> i32 ---
 
 	/// Get the number of joints on this body
 	Body_GetJointCount :: proc(bodyId: BodyId) -> i32 ---
 
 	/// Get the joint ids for all joints on this body, up to the provided capacity
 	/// @returns the number of joint ids stored in the user array
-	Body_GetJoints :: proc(bodyId: BodyId, jointArray: ^JointId, capacity: i32) -> i32 ---
+	Body_GetJoints :: proc(bodyId: BodyId, jointArray: [^]JointId, capacity: i32) -> i32 ---
 
 	/// Get the maximum capacity required for retrieving all the touching contacts on a body
 	Body_GetContactCapacity :: proc(bodyId: BodyId) -> i32 ---
@@ -446,7 +446,7 @@ foreign lib {
 	/// @note Box2D uses speculative collision so some contact points may be separated.
 	/// @returns the number of elements filled in the provided array
 	/// @warning do not ignore the return value, it specifies the valid number of elements
-	Body_GetContactData :: proc(bodyId: BodyId, contactData: ^ContactData, capacity: i32) -> i32 ---
+	Body_GetContactData :: proc(bodyId: BodyId, contactData: [^]ContactData, capacity: i32) -> i32 ---
 
 	/// Get the current world AABB that contains all the attached shapes. Note that this may not encompass the body origin.
 	/// If there are no shapes attached then the returned AABB is empty and centered on the body origin.
@@ -623,7 +623,7 @@ foreign lib {
 	/// @note Box2D uses speculative collision so some contact points may be separated.
 	/// @returns the number of elements filled in the provided array
 	/// @warning do not ignore the return value, it specifies the valid number of elements
-	Shape_GetContactData :: proc(shapeId: ShapeId, contactData: ^ContactData, capacity: i32) -> i32 ---
+	Shape_GetContactData :: proc(shapeId: ShapeId, contactData: [^]ContactData, capacity: i32) -> i32 ---
 
 	/// Get the maximum capacity required for retrieving all the overlapped shapes on a sensor shape.
 	/// This returns 0 if the provided shape is not a sensor.
@@ -675,7 +675,7 @@ foreign lib {
 
 	/// Fill a user array with chain segment shape ids up to the specified capacity. Returns
 	/// the actual number of segments returned.
-	Chain_GetSegments :: proc(chainId: ChainId, segmentArray: ^ShapeId, capacity: i32) -> i32 ---
+	Chain_GetSegments :: proc(chainId: ChainId, segmentArray: [^]ShapeId, capacity: i32) -> i32 ---
 
 	/// Get the number of materials used on this chain. Must be 1 or the number of segments.
 	Chain_GetSurfaceMaterialCount :: proc(chainId: ChainId) -> i32 ---

@@ -1301,10 +1301,10 @@ HexColor :: enum i32 {
 /// @ingroup world
 DebugDraw :: struct {
 	/// Draw a closed polygon provided in CCW order.
-	DrawPolygonFcn: proc "c" (vertices: ^Vec2, vertexCount: i32, color: HexColor, _context: rawptr),
+	DrawPolygonFcn: proc "c" (vertices: [^]Vec2, vertexCount: i32, color: HexColor, _context: rawptr),
 
 	/// Draw a solid closed polygon provided in CCW order.
-	DrawSolidPolygonFcn: proc "c" (transform: Transform, vertices: ^Vec2, vertexCount: i32, radius: f32, color: HexColor, _context: rawptr),
+	DrawSolidPolygonFcn: proc "c" (transform: Transform, vertices: [^]Vec2, vertexCount: i32, radius: f32, color: HexColor, _context: rawptr),
 
 	/// Draw a circle.
 	DrawCircleFcn: proc "c" (center: Vec2, radius: f32, color: HexColor, _context: rawptr),

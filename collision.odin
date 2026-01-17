@@ -287,7 +287,7 @@ foreign lib {
 	/// - more than B2_MAX_POLYGON_VERTICES points
 	/// This welds close points and removes collinear points.
 	/// @warning Do not modify a hull once it has been computed
-	ComputeHull :: proc(points: ^Vec2, count: i32) -> Hull ---
+	ComputeHull :: proc(points: [^]Vec2, count: i32) -> Hull ---
 
 	/// This determines if a hull is valid. Checks for:
 	/// - convexity
@@ -384,7 +384,7 @@ foreign lib {
 	/// Compute the closest points between two shapes represented as point clouds.
 	/// b2SimplexCache cache is input/output. On the first call set b2SimplexCache.count to zero.
 	/// The underlying GJK algorithm may be debugged by passing in debug simplexes and capacity. You may pass in NULL and 0 for these.
-	ShapeDistance :: proc(#by_ptr input: DistanceInput, cache: ^SimplexCache, simplexes: ^Simplex, simplexCapacity: i32) -> DistanceOutput ---
+	ShapeDistance :: proc(#by_ptr input: DistanceInput, cache: ^SimplexCache, simplexes: [^]Simplex, simplexCapacity: i32) -> DistanceOutput ---
 }
 
 /// Input parameters for b2ShapeCast
@@ -405,10 +405,10 @@ foreign lib {
 	ShapeCast :: proc(#by_ptr input: ShapeCastPairInput) -> CastOutput ---
 
 	/// Make a proxy for use in overlap, shape cast, and related functions. This is a deep copy of the points.
-	MakeProxy :: proc(points: ^Vec2, count: i32, radius: f32) -> ShapeProxy ---
+	MakeProxy :: proc(points: [^]Vec2, count: i32, radius: f32) -> ShapeProxy ---
 
 	/// Make a proxy with a transform. This is a deep copy of the points.
-	MakeOffsetProxy :: proc(points: ^Vec2, count: i32, radius: f32, position: Vec2, rotation: Rot) -> ShapeProxy ---
+	MakeOffsetProxy :: proc(points: [^]Vec2, count: i32, radius: f32, position: Vec2, rotation: Rot) -> ShapeProxy ---
 }
 
 /// This describes the motion of a body/shape for TOI computation. Shapes are defined with respect to the body origin,
@@ -663,7 +663,7 @@ foreign lib {
 /// - return a value of 0 to terminate the ray cast
 /// - return a value less than input->maxFraction to clip the ray
 /// - return a value of input->maxFraction to continue the ray cast without clipping
-TreeRayCastCallbackFcn :: proc "c" (input: ^RayCastInput, proxyId: i32, userData: u64, _context: rawptr) -> f32
+TreeRayCastCallbackFcn :: proc "c" (#by_ptr input: RayCastInput, proxyId: i32, userData: u64, _context: rawptr) -> f32
 
 @(default_calling_convention="c", link_prefix="b2")
 foreign lib {
@@ -688,7 +688,7 @@ foreign lib {
 /// - return a value of 0 to terminate the ray cast
 /// - return a value less than input->maxFraction to clip the ray
 /// - return a value of input->maxFraction to continue the ray cast without clipping
-TreeShapeCastCallbackFcn :: proc "c" (input: ^ShapeCastInput, proxyId: i32, userData: u64, _context: rawptr) -> f32
+TreeShapeCastCallbackFcn :: proc "c" (#by_ptr input: ShapeCastInput, proxyId: i32, userData: u64, _context: rawptr) -> f32
 
 @(default_calling_convention="c", link_prefix="b2")
 foreign lib {
@@ -780,10 +780,10 @@ foreign lib {
 	/// @param targetDelta the desired movement from the position used to generate the collision planes
 	/// @param planes the collision planes
 	/// @param count the number of collision planes
-	SolvePlanes :: proc(targetDelta: Vec2, planes: ^CollisionPlane, count: i32) -> PlaneSolverResult ---
+	SolvePlanes :: proc(targetDelta: Vec2, planes: [^]CollisionPlane, count: i32) -> PlaneSolverResult ---
 
 	/// Clips the velocity against the given collision planes. Planes with zero push or clipVelocity
 	/// set to false are skipped.
-	ClipVector :: proc(vector: Vec2, planes: ^CollisionPlane, count: i32) -> Vec2 ---
+	ClipVector :: proc(vector: Vec2, planes: [^]CollisionPlane, count: i32) -> Vec2 ---
 }
 

@@ -69,6 +69,6 @@ HASH_INIT :: 5381
 
 @(default_calling_convention="c", link_prefix="b2")
 foreign lib {
-	Hash :: proc(hash: u32, data: ^u8, count: i32) -> u32 ---
+	Hash :: proc(hash: u32, data: [^]u8, count: i32) -> u32 ---
 }
 
