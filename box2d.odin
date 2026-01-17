@@ -1146,3 +1146,16 @@ foreign lib {
 	Contact_GetData :: proc(contactId: ContactId) -> ContactData ---
 }
 
+IsValid :: proc {
+	IsValidFloat,
+	IsValidVec2,
+	IsValidRotation,
+	IsValidAABB,
+	IsValidPlane,
+	World_IsValid,
+	Body_IsValid,
+	Shape_IsValid,
+	Chain_IsValid,
+	Joint_IsValid,
+	IsValidRay,
+}
